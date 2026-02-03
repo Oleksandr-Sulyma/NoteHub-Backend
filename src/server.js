@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+}
+
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -11,6 +15,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 
 import notesRouter from './routes/notesRoutes.js';
 import authRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 import cookieParser from "cookie-parser";
 
@@ -25,6 +30,7 @@ app.use(cookieParser());
 
 app.use(notesRouter);
 app.use(authRoutes);
+app.use(userRoutes);
 
 app.use(notFoundHandler);
 
