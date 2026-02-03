@@ -133,7 +133,7 @@ export const requestResetEmail = async (req, res, next) => {
       subject: 'Reset your password',
       html,
     });
-  } catch (error){
+  } catch (error) {
     console.log(error);
 
     next(
@@ -159,7 +159,7 @@ export const resetPassword = async (req, res, next) => {
 
   const user = await User.findOne({ _id: payload.sub, email: payload.email });
   if (!user) {
-    next(createHttpError(404, 'User not found'));
+    return next(createHttpError(404, 'User not found'));
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
