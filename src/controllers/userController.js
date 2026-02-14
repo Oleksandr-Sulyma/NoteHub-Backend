@@ -18,3 +18,19 @@ export const updateUserAvatar = async (req, res, next) => {
 
   res.status(200).json({ url: user.avatar });
 };
+
+export const updateUserName = async (req, res, next) => {
+  const { username } = req.body;
+
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    { username },
+    { new: true },
+  );
+
+  if (!user) {
+    return next(createHttpError(404, 'User not found'));
+  }
+
+  res.status(200).json({ username: user.username });
+};

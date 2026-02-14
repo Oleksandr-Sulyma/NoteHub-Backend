@@ -173,3 +173,7 @@ export const resetPassword = async (req, res, next) => {
 
   res.status(200).json({ message: 'Password reset successfully' });
 };
+
+export const checkSession = (req, res) => {
+  res.status(200).json({ success: true });
+};

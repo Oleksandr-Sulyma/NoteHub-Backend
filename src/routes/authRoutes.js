@@ -14,6 +14,9 @@ import {
   requestResetEmail,
   resetPassword,
 } from '../controllers/authController.js';
+import { checkSession } from '../controllers/authController.js';
+import { authenticate } from '../middleware/authenticate.js';
+
 
 const router = Router();
 
@@ -23,6 +26,13 @@ router.post('/auth/refresh', refreshUserSession);
 router.post('/auth/logout', logoutUser);
 router.post('/auth/request-reset-email', celebrate(requestResetEmailSchema), requestResetEmail);
 router.post('/auth/reset-password', celebrate(resetPasswordSchema), resetPassword);
+router.get('/auth/session', authenticate, checkSession);
 
+// router.post('/sign-up', celebrate(registerUserSchema), registerUser);
+// router.post('/auth/login', celebrate(loginUserSchema), loginUser);
+// router.post('/auth/refresh', refreshUserSession);
+// router.post('/auth/logout', logoutUser);
+// router.post('/auth/request-reset-email', celebrate(requestResetEmailSchema), requestResetEmail);
+// router.post('/auth/reset-password', celebrate(resetPasswordSchema), resetPassword);
 
 export default router;
