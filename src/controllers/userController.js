@@ -2,6 +2,20 @@ import createHttpError from 'http-errors';
 import { User } from '../models/user.js';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 
+export const getCurrentUser = async (req, res, next) => {
+  const user = await User.findById(req.user._id);
+
+  if (!user) {
+    return next(createHttpError(404, 'User not found'));
+  }
+
+  res.status(200).json({
+    email: user.email,
+    username: user.username,
+    avatar: user.avatar,
+  });
+};
+
 export const updateUserAvatar = async (req, res, next) => {
   if (!req.file) {
     next(createHttpError(400, 'No file'));

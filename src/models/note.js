@@ -32,7 +32,7 @@ const noteSchema = new Schema(
 
 noteSchema.index(
   {
-    title: 'text',
+     title: 'text',
     content: 'text',
   },
   {

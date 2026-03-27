@@ -147,6 +147,7 @@ export const requestResetEmail = async (req, res, next) => {
   });
 };
 
+
 export const resetPassword = async (req, res, next) => {
   const { token, password } = req.body;
   let payload;
@@ -174,6 +175,34 @@ export const resetPassword = async (req, res, next) => {
   res.status(200).json({ message: 'Password reset successfully' });
 };
 
-export const checkSession = (req, res) => {
-  res.status(200).json({ success: true });
+export const checkSession = async (req, res, next) => {
+  try {
+    const { sessionId, accessToken, refreshToken } = req.cookies;
+
+    if (!sessionId) {
+      return next(createHttpError(401, 'No active session'));
+    }
+
+    const session = await Session.findOne({ _id: sessionId, accessToken });
+
+    if (!session) {
+      console.log("!!session");
+      return next(createHttpError(401, 'Invalid session'));
+    }
+
+    const now = new Date();
+
+    if (now > new Date(session.accessTokenValidUntil)) {
+      if (refreshToken && refreshToken === session.refreshToken && now < new Date(session.refreshTokenValidUntil)) {
+        const newSession = await refreshUserSession(req, res, next, session);
+        return res.status(200).json({ success: true, refreshed: true, session: newSession._id });
+      } else {
+        return next(createHttpError(401, 'Session expired'));
+      }
+    }
+
+    res.status(200).json({ success: true, session: session._id });
+  } catch (error) {
+    next(error);
+  }
 };

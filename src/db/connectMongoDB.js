@@ -11,6 +11,7 @@ export const connectMongoDB = async () => {
     console.log('Indexes synced successfully');
   } catch (error) {
     console.error('❌ Failed to connect to MongoDB:', error.message);
+    console.error(error);
     process.exit(1);
   }
 };
