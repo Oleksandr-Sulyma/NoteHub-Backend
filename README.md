@@ -4,6 +4,16 @@ REST API for NoteHub, a fullstack notes management application with user authent
 
 This backend is built with Express.js and MongoDB. It uses HTTP-only cookies for session handling, Mongoose for data modeling, Celebrate/Joi for validation, Cloudinary for avatar storage, and Nodemailer for password reset emails.
 
+## Live Demo
+
+- Backend API: [https://nodejs-hw-awfs.onrender.com](https://nodejs-hw-awfs.onrender.com)
+- Repository: [NoteHub Backend](https://github.com/Oleksandr-Sulyma/NoteHub-Backend)
+
+## API Preview
+
+![NoteHub Backend registration request in Postman](./docs/screenshots/postman-register.png)
+![NoteHub Backend deployment on Render](./docs/screenshots/render-deployment.png)
+
 ## Features
 
 - User registration and login
@@ -61,8 +71,8 @@ src/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Oleksandr-Sulyma/nodejs-hw.git
-cd nodejs-hw
+git clone https://github.com/Oleksandr-Sulyma/NoteHub-Backend.git
+cd NoteHub-Backend
 ```
 
 ### 2. Install dependencies
@@ -299,3 +309,4 @@ Oleksandr Sulyma
 
 - GitHub: [Oleksandr-Sulyma](https://github.com/Oleksandr-Sulyma)
 - LinkedIn: [oleksandr-sulyma](https://www.linkedin.com/in/oleksandr-sulyma/)
+
